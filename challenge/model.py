@@ -2,12 +2,14 @@ import pandas as pd
 
 from typing import Tuple, Union, List
 
+from joblib import load
+
 class DelayModel:
 
     def __init__(
         self
     ):
-        self._model = None # Model should be saved in this attribute.
+        self._model = load('model.joblib') # Model should be saved in this attribute.
 
     def preprocess(
         self,
@@ -26,7 +28,14 @@ class DelayModel:
             or
             pd.DataFrame: features.
         """
-        return
+        
+        if target_column:
+            features = data.drop(columns=[target_column])
+            target = data[target_column]
+            return features, target
+        else:
+            return data
+        
 
     def fit(
         self,
@@ -40,7 +49,8 @@ class DelayModel:
             features (pd.DataFrame): preprocessed data.
             target (pd.DataFrame): target.
         """
-        return
+        
+        self._model.fit(features, target)
 
     def predict(
         self,
@@ -55,4 +65,4 @@ class DelayModel:
         Returns:
             (List[int]): predicted targets.
         """
-        return
+        return self._model.predict(features)
