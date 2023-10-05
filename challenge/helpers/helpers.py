@@ -66,3 +66,16 @@ def get_rate_from_column(data, column):
             rates[name] = 0
             
     return pd.DataFrame.from_dict(data = rates, orient = 'index', columns = ['Tasa (%)'])
+
+FEATURES_COLS = [
+        "OPERA_Latin American Wings", 
+        "MES_7",
+        "MES_10",
+        "OPERA_Grupo LATAM",
+        "MES_12",
+        "TIPOVUELO_I",
+        "MES_4",
+        "MES_11",
+        "OPERA_Sky Airline",
+        "OPERA_Copa Air"
+    ]
